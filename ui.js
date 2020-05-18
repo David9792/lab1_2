@@ -10,15 +10,25 @@ class Ui {
         let p1 = new Products("Pollo", "Pollo Sofia", 20);
         let p2 = new Products("Galletas", "Galleras Mabel", 50);
         let p3 = new Products("Pollo", "Pollo Imba", 50);
+        let p4 = new Products("Pollo", "Pollo Sofia", 20);
         this.manager.addProducts(p1);
         this.manager.addProducts(p2);
         this.manager.addProducts(p3);
+        
         this.loadEvents();
     }
     loadEvents() {
         this.uiForm.addEventListener("submit", (e) => {
             e.preventDefault();
             this.addProducts(
+                this.uiName.value,
+                this.uiDescription.value,
+                this.uiQuantity.value);
+            this.clearForm();
+        });
+        this.uiForm.removeEventListener("eliminar", (e) => {
+            e.preventDefault();
+            this.removeProducts(
                 this.uiName.value,
                 this.uiDescription.value,
                 this.uiQuantity.value);
@@ -49,6 +59,16 @@ class Ui {
         this.loadTable();
 
     }
+    removeProducts(name, description, quantity) {
+        let p1 = new Products(name, description, quantity);
+        this.manager.removeProducts();
+        this.loadTable();
+            }
+    updateProducts(name, description, quantity) {
+        let p1 = new Products(name, description, quantity);
+        this.manager.updateProducts(p1);
+        this.loadTable();
+                    }        
 }
 let ui = new Ui();
 ui.loadTable();
